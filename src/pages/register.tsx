@@ -20,7 +20,7 @@ const Register: NextPage = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [password_confirmation, setPasswordConfirmation] = useState('')
-    const [errors, setErrors] = useState([])
+    const [errors, setErrors] = useState<string[]>([])
 
     const submitForm = (event: SyntheticEvent) => {
         event.preventDefault()
@@ -37,8 +37,8 @@ const Register: NextPage = () => {
                             <ApplicationLogo className="w-20 h-20 fill-current text-gray-500" />
                         </a>
                     </Link>
-                }>
-
+                }
+            >
                 {/* Validation Errors */}
                 <AuthValidationErrors className="mb-4" errors={errors} />
 

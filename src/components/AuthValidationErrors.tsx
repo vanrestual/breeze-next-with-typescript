@@ -1,14 +1,19 @@
-import { HTMLAttributes } from 'react';
+import { HTMLAttributes } from 'react'
 
 interface AuthValidationErrorsProps extends HTMLAttributes<HTMLDivElement> {
-    errors: string[];
-} 
+    errors?: string[]
+}
 
-const AuthValidationErrors = ({ errors = [], ...props }: AuthValidationErrorsProps) => (
+const AuthValidationErrors = ({
+    errors = [],
+    ...props
+}: AuthValidationErrorsProps) => (
     <>
         {errors.length > 0 && (
             <div {...props}>
-                <div className="font-medium text-red-600">Whoops! Something went wrong.</div>
+                <div className="font-medium text-red-600">
+                    Whoops! Something went wrong.
+                </div>
                 <ul className="mt-3 list-disc list-inside text-sm text-red-600">
                     {errors.map(error => (
                         <li key={error}>{error}</li>
@@ -19,4 +24,4 @@ const AuthValidationErrors = ({ errors = [], ...props }: AuthValidationErrorsPro
     </>
 )
 
-export default AuthValidationErrors;
+export default AuthValidationErrors

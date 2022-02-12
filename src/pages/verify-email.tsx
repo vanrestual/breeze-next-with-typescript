@@ -8,9 +8,9 @@ import Button from '@/components/Button'
 import GuestLayout from '@/components/Layouts/GuestLayout'
 
 const VerifyEmail: NextPage = () => {
-    const { logout, resendEmailVerification } = useAuth({ middleware: 'auth'})
+    const { logout, resendEmailVerification } = useAuth({ middleware: 'auth' })
 
-    const [status, setStatus] = useState(null)
+    const [status, setStatus] = useState<string | null>(null)
 
     return (
         <GuestLayout>
@@ -21,13 +21,13 @@ const VerifyEmail: NextPage = () => {
                             <ApplicationLogo className="w-20 h-20 fill-current text-gray-500" />
                         </a>
                     </Link>
-                }>
-
+                }
+            >
                 <div className="mb-4 text-sm text-gray-600">
                     Thanks for signing up! Before getting started, could you
                     verify your email address by clicking on the link we just
-                    emailed to you? If you didn&apos;t receive the email, we will
-                    gladly send you another.
+                    emailed to you? If you didn&apos;t receive the email, we
+                    will gladly send you another.
                 </div>
 
                 {status == 'verification-link-sent' && (
@@ -39,14 +39,16 @@ const VerifyEmail: NextPage = () => {
 
                 <div className="mt-4 flex items-center justify-between">
                     <Button
-                        onClick={() => resendEmailVerification({ setStatus })}>
+                        onClick={() => resendEmailVerification({ setStatus })}
+                    >
                         Resend Verification Email
                     </Button>
 
                     <button
                         type="button"
                         className="underline text-sm text-gray-600 hover:text-gray-900"
-                        onClick={logout}>
+                        onClick={logout}
+                    >
                         Logout
                     </button>
                 </div>

@@ -1,7 +1,7 @@
-import { useState, SyntheticEvent } from 'react';
+import { useState, SyntheticEvent } from 'react'
 import type { NextPage } from 'next'
 import Link from 'next/link'
-import { useAuth } from '@/hooks/auth';
+import { useAuth } from '@/hooks/auth'
 import ApplicationLogo from '@/components/ApplicationLogo'
 import AuthCard from '@/components/AuthCard'
 import AuthSessionStatus from '@/components/AuthSessionStatus'
@@ -15,8 +15,8 @@ const ForgotPassword: NextPage = () => {
     const { forgotPassword } = useAuth({ middleware: 'guest' })
 
     const [email, setEmail] = useState('')
-    const [errors, setErrors] = useState([])
-    const [status, setStatus] = useState(null)
+    const [errors, setErrors] = useState<string[]>([])
+    const [status, setStatus] = useState<string | null>(null)
 
     const submitForm = (event: SyntheticEvent) => {
         event.preventDefault()
@@ -33,8 +33,8 @@ const ForgotPassword: NextPage = () => {
                             <ApplicationLogo className="w-20 h-20 fill-current text-gray-500" />
                         </a>
                     </Link>
-                }>
-
+                }
+            >
                 <div className="mb-4 text-sm text-gray-600">
                     Forgot your password? No problem. Just let us know your
                     email address and we will email you a password reset link

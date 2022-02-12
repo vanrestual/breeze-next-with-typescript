@@ -1,5 +1,5 @@
-import { FC } from 'react';
-import Head from 'next/head';
+import { FC } from 'react'
+import Head from 'next/head'
 
 const GuestLayout: FC = ({ children }) => {
     return (
@@ -15,4 +15,4 @@ const GuestLayout: FC = ({ children }) => {
     )
 }
 
-export default GuestLayout;
+export default GuestLayout

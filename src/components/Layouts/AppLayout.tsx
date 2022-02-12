@@ -1,13 +1,13 @@
-import { FC, ReactElement } from 'react';
-import Navigation from '@/components/Layouts/Navigation';
-import { useAuth } from '@/hooks/auth';
+import { FC, ReactElement } from 'react'
+import Navigation from '@/components/Layouts/Navigation'
+import { useAuth } from '@/hooks/auth'
 
 interface AppLayoutProps {
-    header: ReactElement;
+    header: ReactElement
 }
 
 const AppLayout: FC<AppLayoutProps> = ({ header, children }) => {
-    const { user } = useAuth({ middleware: 'auth' });
+    const { user } = useAuth({ middleware: 'auth' })
 
     return (
         <div className="min-h-screen bg-gray-100">
@@ -26,4 +26,4 @@ const AppLayout: FC<AppLayoutProps> = ({ header, children }) => {
     )
 }
 
-export default AppLayout;
+export default AppLayout

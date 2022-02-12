@@ -22,11 +22,11 @@ const Login: NextPage = () => {
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [errors, setErrors] = useState([])
-    const [status, setStatus] = useState(null)
+    const [errors, setErrors] = useState<string[]>([])
+    const [status, setStatus] = useState<string | null>(null)
 
     useEffect(() => {
-        if (router.query.reset?.length as number > 0 && errors.length == 0) {
+        if ((router.query.reset?.length as number) > 0 && errors.length == 0) {
             setStatus((window as any).atob(router.query.reset))
         } else {
             setStatus(null)
@@ -48,8 +48,8 @@ const Login: NextPage = () => {
                             <ApplicationLogo className="w-20 h-20 fill-current text-gray-500" />
                         </a>
                     </Link>
-                }>
-
+                }
+            >
                 {/* Session Status */}
                 <AuthSessionStatus className="mb-4" status={status} />
 
@@ -91,7 +91,8 @@ const Login: NextPage = () => {
                     <div className="block mt-4">
                         <label
                             htmlFor="remember_me"
-                            className="inline-flex items-center">
+                            className="inline-flex items-center"
+                        >
                             <input
                                 id="remember_me"
                                 type="checkbox"
@@ -120,4 +121,4 @@ const Login: NextPage = () => {
     )
 }
 
-export default Login;
+export default Login
