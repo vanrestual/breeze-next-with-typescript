@@ -30,7 +30,7 @@ const VerifyEmail: NextPage = () => {
                     will gladly send you another.
                 </div>
 
-                {status == 'verification-link-sent' && (
+                {status === 'verification-link-sent' && (
                     <div className="mb-4 font-medium text-sm text-green-600">
                         A new verification link has been sent to the email
                         address you provided during registration.

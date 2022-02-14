@@ -20,7 +20,7 @@ export const useAuth = (
             .get('/api/user')
             .then(res => res.data)
             .catch(error => {
-                if (error.response.status != 409) throw error
+                if (error.response.status !== 409) throw error
                 router.push('/verify-email')
             }),
     )
@@ -45,7 +45,7 @@ export const useAuth = (
             .post('/register', props)
             .then(() => mutate())
             .catch(error => {
-                if (error.response.status != 422) throw error
+                if (error.response.status !== 422) throw error
                 setErrors(
                     Object.values(
                         error.response.data.errors,
@@ -73,7 +73,7 @@ export const useAuth = (
             .post('/login', props)
             .then(() => mutate())
             .catch(error => {
-                if (error.response.status != 422) throw error
+                if (error.response.status !== 422) throw error
 
                 setErrors(
                     Object.values(
@@ -101,7 +101,7 @@ export const useAuth = (
             .post('/forgot-password', { email })
             .then(response => setStatus(response.data.status))
             .catch(error => {
-                if (error.response.status != 422) throw error
+                if (error.response.status !== 422) throw error
 
                 setErrors(
                     Object.values(
@@ -130,10 +130,13 @@ export const useAuth = (
         axios
             .post('/reset-password', { token: router.query.token, ...props })
             .then(response =>
-                router.push('/login?reset=' + btoa(response.data.status)),
+                router.push(
+                    '/login?reset=' +
+                        (window as any).btoa(response.data.status),
+                ),
             )
             .catch(error => {
-                if (error.response.status != 422) throw error
+                if (error.response.status !== 422) throw error
 
                 setErrors(
                     Object.values(
@@ -162,12 +165,9 @@ export const useAuth = (
     }, [error, mutate])
 
     useEffect(() => {
-        if (middleware == 'guest' && redirectIfAuthenticated && user) {
+        if (middleware === 'guest' && redirectIfAuthenticated && user)
             router.push(redirectIfAuthenticated)
-        }
-        if (middleware == 'auth' && error) {
-            logout()
-        }
+        if (middleware === 'auth' && error) logout()
     }, [user, error, router, middleware, redirectIfAuthenticated, logout])
 
     return {

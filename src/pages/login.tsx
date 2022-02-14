@@ -26,7 +26,7 @@ const Login: NextPage = () => {
     const [status, setStatus] = useState<string | null>(null)
 
     useEffect(() => {
-        if ((router.query.reset?.length as number) > 0 && errors.length == 0) {
+        if ((router.query.reset?.length as number) > 0 && errors.length === 0) {
             setStatus((window as any).atob(router.query.reset))
         } else {
             setStatus(null)
