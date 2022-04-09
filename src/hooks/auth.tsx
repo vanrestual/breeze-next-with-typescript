@@ -158,8 +158,7 @@ export const useAuth = (
 
     const logout = useCallback(async () => {
         if (!error) {
-            await axios.post('/logout')
-            mutate()
+            await axios..post('/logout').then(() => mutate())
         }
         window.location.pathname = '/login'
     }, [error, mutate])
