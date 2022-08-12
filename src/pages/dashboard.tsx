@@ -6,7 +6,7 @@ const Dashboard: NextPage = () => {
     return (
         <AppLayout
             header={
-                <h2 className="font-semibold text-xl text-gray-800 leading-tight">
+                <h2 className="text-xl font-semibold leading-tight text-gray-800">
                     Dashboard
                 </h2>
             }
@@ -16,9 +16,9 @@ const Dashboard: NextPage = () => {
             </Head>
 
             <div className="py-12">
-                <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                        <div className="p-6 bg-white border-b border-gray-200">
+                <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
+                    <div className="overflow-hidden bg-white shadow-sm sm:rounded-lg">
+                        <div className="border-b border-gray-200 bg-white p-6">
                             You&apos;re logged in!
                         </div>
                     </div>

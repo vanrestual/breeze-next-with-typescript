@@ -1,15 +1,15 @@
 import { useEffect, useState, SyntheticEvent } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { useAuth } from '@/hooks/auth'
+import GuestLayout from '@/components/Layouts/GuestLayout'
 import ApplicationLogo from '@/components/ApplicationLogo'
 import AuthCard from '@/components/AuthCard'
 import AuthSessionStatus from '@/components/AuthSessionStatus'
 import AuthValidationErrors from '@/components/AuthValidationErrors'
 import Button from '@/components/Button'
-import GuestLayout from '@/components/Layouts/GuestLayout'
 import Input from '@/components/Input'
 import Label from '@/components/Label'
+import { useAuth } from '@/hooks/auth'
 
 const PasswordReset = () => {
     const router = useRouter()
@@ -18,7 +18,7 @@ const PasswordReset = () => {
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [password_confirmation, setPasswordConfirmation] = useState('')
+    const [passwordConfirmation, setPasswordConfirmation] = useState('')
     const [errors, setErrors] = useState<string[]>([])
     const [status, setStatus] = useState<string | null>(null)
 
@@ -28,7 +28,7 @@ const PasswordReset = () => {
         resetPassword({
             email,
             password,
-            password_confirmation,
+            password_confirmation: passwordConfirmation,
             setErrors,
             setStatus,
         })
@@ -44,7 +44,7 @@ const PasswordReset = () => {
                 logo={
                     <Link href="/">
                         <a>
-                            <ApplicationLogo className="w-20 h-20 fill-current text-gray-500" />
+                            <ApplicationLogo className="h-20 w-20 fill-current text-gray-500" />
                         </a>
                     </Link>
                 }
@@ -64,7 +64,7 @@ const PasswordReset = () => {
                             id="email"
                             type="email"
                             value={email}
-                            className="block mt-1 w-full"
+                            className="mt-1 block w-full"
                             onChange={event => setEmail(event.target.value)}
                             required
                             autoFocus
@@ -78,7 +78,7 @@ const PasswordReset = () => {
                             id="password"
                             type="password"
                             value={password}
-                            className="block mt-1 w-full"
+                            className="mt-1 block w-full"
                             onChange={event => setPassword(event.target.value)}
                             required
                         />
@@ -86,15 +86,15 @@ const PasswordReset = () => {
 
                     {/* Confirm Password */}
                     <div className="mt-4">
-                        <Label htmlFor="password_confirmation">
+                        <Label htmlFor="passwordConfirmation">
                             Confirm Password
                         </Label>
 
                         <Input
-                            id="password_confirmation"
+                            id="passwordConfirmation"
                             type="password"
-                            value={password_confirmation}
-                            className="block mt-1 w-full"
+                            value={passwordConfirmation}
+                            className="mt-1 block w-full"
                             onChange={event =>
                                 setPasswordConfirmation(event.target.value)
                             }
@@ -102,7 +102,7 @@ const PasswordReset = () => {
                         />
                     </div>
 
-                    <div className="flex items-center justify-end mt-4">
+                    <div className="mt-4 flex items-center justify-end">
                         <Button>Reset Password</Button>
                     </div>
                 </form>

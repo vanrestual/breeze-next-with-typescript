@@ -1,7 +1,7 @@
-import useSWR from 'swr'
-import axios from '@/lib/axios'
 import { useEffect, useCallback } from 'react'
 import { useRouter } from 'next/router'
+import useSWR from 'swr'
+import axios from '@/lib/axios'
 
 export const useAuth = (
     { middleware, redirectIfAuthenticated } = {} as {
@@ -71,14 +71,14 @@ export const useAuth = (
 
         axios
             .post('/login', props)
-            .then(() => mutate())
+            .then(() => {
+                mutate()
+            })
             .catch(error => {
                 if (error.response.status !== 422) throw error
 
                 setErrors(
-                    Object.values(
-                        error.response.data.errors,
-                    ).flat() as string[],
+                    Object.values(error.response.data.errors).flat() as [],
                 )
             })
     }
@@ -158,7 +158,9 @@ export const useAuth = (
 
     const logout = useCallback(async () => {
         if (!error) {
-            await axios.post('/logout').then(() => mutate())
+            await axios.post('/logout').then(() => {
+                mutate()
+            })
         }
         window.location.pathname = '/login'
     }, [error, mutate])

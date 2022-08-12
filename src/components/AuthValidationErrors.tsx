@@ -1,20 +1,20 @@
-import { HTMLAttributes } from 'react'
+import type { FC, HTMLAttributes } from 'react'
 
 interface AuthValidationErrorsProps extends HTMLAttributes<HTMLDivElement> {
     errors?: string[]
 }
 
-const AuthValidationErrors = ({
+const AuthValidationErrors: FC<AuthValidationErrorsProps> = ({
     errors = [],
     ...props
-}: AuthValidationErrorsProps) => (
+}) => (
     <>
         {errors.length > 0 && (
             <div {...props}>
                 <div className="font-medium text-red-600">
                     Whoops! Something went wrong.
                 </div>
-                <ul className="mt-3 list-disc list-inside text-sm text-red-600">
+                <ul className="mt-3 list-inside list-disc text-sm text-red-600">
                     {errors.map(error => (
                         <li key={error}>{error}</li>
                     ))}

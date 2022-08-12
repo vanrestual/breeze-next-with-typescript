@@ -1,5 +1,11 @@
-import { FC, Fragment, ReactElement, useState } from 'react'
+import {
+    type FC,
+    Fragment,
+    type PropsWithChildren,
+    type ReactElement,
+} from 'react'
 import { Menu, Transition } from '@headlessui/react'
+import clsx from 'clsx'
 
 interface DropdownProps {
     align: 'left' | 'right' | 'top'
@@ -9,20 +15,14 @@ interface DropdownProps {
     trigger: ReactElement
 }
 
-const Dropdown: FC<DropdownProps> = ({
+const Dropdown: FC<PropsWithChildren<DropdownProps>> = ({
     align = 'right',
-    width = 48,
+    children,
     contentClasses = 'py-1 bg-white',
     trigger,
-    children,
+    width = 48,
 }) => {
     let alignmentClasses: string
-
-    switch (width) {
-        case '48':
-            width = 'w-48'
-            break
-    }
 
     switch (align) {
         case 'left':
@@ -37,7 +37,11 @@ const Dropdown: FC<DropdownProps> = ({
             break
     }
 
-    const [open, setOpen] = useState(false)
+    switch (width) {
+        case '48':
+            width = 'w-48'
+            break
+    }
 
     return (
         <Menu as="div" className="relative">
@@ -54,10 +58,17 @@ const Dropdown: FC<DropdownProps> = ({
                         leaveTo="opacity-0 scale-95"
                     >
                         <div
-                            className={`absolute z-50 mt-2 ${width} rounded-md shadow-lg ${alignmentClasses}`}
+                            className={clsx(
+                                alignmentClasses,
+                                width,
+                                'absolute z-50 mt-2 rounded-md shadow-lg',
+                            )}
                         >
                             <Menu.Items
-                                className={`rounded-md focus:outline-none ring-1 ring-black ring-opacity-5 ${contentClasses}`}
+                                className={clsx(
+                                    contentClasses,
+                                    'rounded-md ring-1 ring-black/5 focus:outline-none',
+                                )}
                                 static
                             >
                                 {children}

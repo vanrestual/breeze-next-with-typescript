@@ -1,12 +1,13 @@
-import { FC, LabelHTMLAttributes } from 'react'
+import type { FC, LabelHTMLAttributes } from 'react'
+import clsx from 'clsx'
 
-interface LabelProps extends LabelHTMLAttributes<HTMLLabelElement> {
-    className?: string
-}
-
-const Label: FC<LabelProps> = ({ className, children, ...props }) => (
+const Label: FC<LabelHTMLAttributes<HTMLLabelElement>> = ({
+    children,
+    className,
+    ...props
+}) => (
     <label
-        className={`${className} block font-medium text-sm text-gray-700`}
+        className={clsx(className, 'block text-sm font-medium text-gray-700')}
         {...props}
     >
         {children}

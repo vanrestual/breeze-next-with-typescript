@@ -30,14 +30,14 @@ php artisan serve
 
 Next, clone this repository and install its dependencies with `yarn install` or `npm install`. Then, copy the `.env.example` file to `.env.local` and supply the URL of your backend:
 
-```
-NEXT_PUBLIC_BACKEND_URL=http://localhost:8000
+```NEXT_PUBLIC_BACKEND_URL=http://localhost:8000
+
 ```
 
 Finally, run the application via `npm run dev`. The application will be available at `http://localhost:3000`:
 
-```
-npm run dev
+```npm run dev
+
 ```
 
 > Note: Currently, we recommend using `localhost` during local development of your backend and frontend to avoid CORS "Same-Origin" issues.
@@ -60,6 +60,10 @@ export default ExamplePage
 ```
 
 > Note: You will need to use [optional chaining](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining) (`user?.name` instead of `user.name`) when accessing properties on the user object to account for Next.js's initial server-side render.
+
+### Named Routes
+
+For convenience, [Ziggy](https://github.com/tighten/ziggy#spas-or-separate-repos) may be used to reference your Laravel application's named route URLs from your React application.
 
 ## Contributing
 

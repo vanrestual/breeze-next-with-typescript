@@ -1,19 +1,23 @@
-import { HTMLAttributes } from 'react'
+import type { FC, HTMLAttributes } from 'react'
+import clsx from 'clsx'
 
 interface AuthSessionStatusProps extends HTMLAttributes<HTMLDivElement> {
     className?: string
     status?: string | null
 }
 
-const AuthSessionStatus = ({
+const AuthSessionStatus: FC<AuthSessionStatusProps> = ({
     status,
     className,
     ...props
-}: AuthSessionStatusProps) => (
+}) => (
     <>
         {status && (
             <div
-                className={`${className} font-medium text-sm text-green-600`}
+                className={clsx(
+                    className,
+                    'text-sm font-medium text-green-600',
+                )}
                 {...props}
             >
                 {status}

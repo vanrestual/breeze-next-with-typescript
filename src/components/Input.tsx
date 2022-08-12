@@ -1,14 +1,17 @@
-import { InputHTMLAttributes } from 'react'
+import type { FC, InputHTMLAttributes } from 'react'
+import clsx from 'clsx'
 
-interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-    className?: string
-    disabled?: boolean
-}
-
-const Input = ({ disabled = false, className, ...props }: InputProps) => (
+const Input: FC<InputHTMLAttributes<HTMLInputElement>> = ({
+    disabled = false,
+    className,
+    ...props
+}) => (
     <input
+        className={clsx(
+            className,
+            'rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200/50',
+        )}
         disabled={disabled}
-        className={`${className} rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50`}
         {...props}
     />
 )

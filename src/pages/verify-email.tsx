@@ -1,11 +1,11 @@
 import { useState } from 'react'
 import type { NextPage } from 'next'
 import Link from 'next/link'
-import { useAuth } from '@/hooks/auth'
+import GuestLayout from '@/components/Layouts/GuestLayout'
 import ApplicationLogo from '@/components/ApplicationLogo'
 import AuthCard from '@/components/AuthCard'
 import Button from '@/components/Button'
-import GuestLayout from '@/components/Layouts/GuestLayout'
+import { useAuth } from '@/hooks/auth'
 
 const VerifyEmail: NextPage = () => {
     const { logout, resendEmailVerification } = useAuth({ middleware: 'auth' })
@@ -18,7 +18,7 @@ const VerifyEmail: NextPage = () => {
                 logo={
                     <Link href="/">
                         <a>
-                            <ApplicationLogo className="w-20 h-20 fill-current text-gray-500" />
+                            <ApplicationLogo className="h-20 w-20 fill-current text-gray-500" />
                         </a>
                     </Link>
                 }
@@ -31,7 +31,7 @@ const VerifyEmail: NextPage = () => {
                 </div>
 
                 {status === 'verification-link-sent' && (
-                    <div className="mb-4 font-medium text-sm text-green-600">
+                    <div className="mb-4 text-sm font-medium text-green-600">
                         A new verification link has been sent to the email
                         address you provided during registration.
                     </div>
@@ -46,7 +46,7 @@ const VerifyEmail: NextPage = () => {
 
                     <button
                         type="button"
-                        className="underline text-sm text-gray-600 hover:text-gray-900"
+                        className="text-sm text-gray-600 underline hover:text-gray-900"
                         onClick={logout}
                     >
                         Logout
