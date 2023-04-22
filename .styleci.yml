@@ -1,5 +1,5 @@
+css: true
+js: true
 php:
     preset: laravel
-js: true
-css: true
 ts: true

@@ -5,9 +5,9 @@ import GuestLayout from '@/components/Layouts/GuestLayout'
 import ApplicationLogo from '@/components/ApplicationLogo'
 import AuthCard from '@/components/AuthCard'
 import AuthSessionStatus from '@/components/AuthSessionStatus'
-import AuthValidationErrors from '@/components/AuthValidationErrors'
 import Button from '@/components/Button'
 import Input from '@/components/Input'
+import InputError from '@/components/InputError'
 import Label from '@/components/Label'
 import { useAuth } from '@/hooks/auth'
 
@@ -19,7 +19,13 @@ const PasswordReset = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [passwordConfirmation, setPasswordConfirmation] = useState('')
-    const [errors, setErrors] = useState<string[]>([])
+    const [errors, setErrors] = useState(
+        {} as {
+            email: Array<string>
+            password: Array<string>
+            password_confirmation: Array<string>
+        },
+    )
     const [status, setStatus] = useState<string | null>(null)
 
     const submitForm = (event: SyntheticEvent) => {
@@ -43,17 +49,12 @@ const PasswordReset = () => {
             <AuthCard
                 logo={
                     <Link href="/">
-                        <a>
-                            <ApplicationLogo className="h-20 w-20 fill-current text-gray-500" />
-                        </a>
+                        <ApplicationLogo className="h-20 w-20 fill-current text-gray-500" />
                     </Link>
                 }
             >
                 {/* Session Status */}
                 <AuthSessionStatus className="mb-4" status={status} />
-
-                {/* Validation Errors */}
-                <AuthValidationErrors className="mb-4" errors={errors} />
 
                 <form onSubmit={submitForm}>
                     {/* Email Address */}
@@ -69,6 +70,7 @@ const PasswordReset = () => {
                             required
                             autoFocus
                         />
+                        <InputError messages={errors.email} className="mt-2" />
                     </div>
 
                     {/* Password */}
@@ -81,6 +83,10 @@ const PasswordReset = () => {
                             className="mt-1 block w-full"
                             onChange={event => setPassword(event.target.value)}
                             required
+                        />
+                        <InputError
+                            messages={errors.password}
+                            className="mt-2"
                         />
                     </div>
 
@@ -99,6 +105,10 @@ const PasswordReset = () => {
                                 setPasswordConfirmation(event.target.value)
                             }
                             required
+                        />
+                        <InputError
+                            messages={errors.password_confirmation}
+                            className="mt-2"
                         />
                     </div>
 

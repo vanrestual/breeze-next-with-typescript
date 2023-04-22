@@ -5,17 +5,20 @@ import GuestLayout from '@/components/Layouts/GuestLayout'
 import ApplicationLogo from '@/components/ApplicationLogo'
 import AuthCard from '@/components/AuthCard'
 import AuthSessionStatus from '@/components/AuthSessionStatus'
-import AuthValidationErrors from '@/components/AuthValidationErrors'
 import Button from '@/components/Button'
 import Input from '@/components/Input'
+import InputError from '@/components/InputError'
 import Label from '@/components/Label'
 import { useAuth } from '@/hooks/auth'
 
 const ForgotPassword: NextPage = () => {
-    const { forgotPassword } = useAuth({ middleware: 'guest' })
+    const { forgotPassword } = useAuth({
+        middleware: 'guest',
+        redirectIfAuthenticated: '/dashboard',
+    })
 
     const [email, setEmail] = useState('')
-    const [errors, setErrors] = useState<string[]>([])
+    const [errors, setErrors] = useState({} as { email: Array<string> })
     const [status, setStatus] = useState<string | null>(null)
 
     const submitForm = (event: SyntheticEvent) => {
@@ -29,9 +32,7 @@ const ForgotPassword: NextPage = () => {
             <AuthCard
                 logo={
                     <Link href="/">
-                        <a>
-                            <ApplicationLogo className="h-20 w-20 fill-current text-gray-500" />
-                        </a>
+                        <ApplicationLogo className="h-20 w-20 fill-current text-gray-500" />
                     </Link>
                 }
             >
@@ -43,9 +44,6 @@ const ForgotPassword: NextPage = () => {
 
                 {/* Session Status */}
                 <AuthSessionStatus className="mb-4" status={status} />
-
-                {/* Validation Errors */}
-                <AuthValidationErrors className="mb-4" errors={errors} />
 
                 <form onSubmit={submitForm}>
                     {/* Email Address */}
@@ -61,6 +59,7 @@ const ForgotPassword: NextPage = () => {
                             required
                             autoFocus
                         />
+                        <InputError messages={errors.email} className="mt-2" />
                     </div>
 
                     <div className="mt-4 flex items-center justify-end">

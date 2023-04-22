@@ -1,4 +1,4 @@
-import { useEffect, useCallback } from 'react'
+import { Dispatch, SetStateAction, useEffect, useCallback } from 'react'
 import { useRouter } from 'next/router'
 import useSWR from 'swr'
 import axios from '@/lib/axios'
@@ -35,22 +35,32 @@ export const useAuth = (
         email: string
         password: string
         password_confirmation: string
-        setErrors: (error: string[]) => void
+        setErrors: Dispatch<
+            SetStateAction<{
+                email: Array<string>
+                name: Array<string>
+                password: Array<string>
+                password_confirmation: Array<string>
+            }>
+        >
     }) => {
         await csrf()
 
-        setErrors([])
+        setErrors(
+            {} as {
+                email: Array<string>
+                name: Array<string>
+                password: Array<string>
+                password_confirmation: Array<string>
+            },
+        )
 
         axios
             .post('/register', props)
             .then(() => mutate())
             .catch(error => {
                 if (error.response.status !== 422) throw error
-                setErrors(
-                    Object.values(
-                        error.response.data.errors,
-                    ).flat() as string[],
-                )
+                setErrors(error.response.data.errors)
             })
     }
 
@@ -61,12 +71,23 @@ export const useAuth = (
     }: {
         email: string
         password: string
-        setErrors: (error: string[]) => void
+        remember: boolean
+        setErrors: Dispatch<
+            SetStateAction<{
+                email: Array<string>
+                password: Array<string>
+            }>
+        >
         setStatus: (status: string | null) => void
     }) => {
         await csrf()
 
-        setErrors([])
+        setErrors(
+            {} as {
+                email: Array<string>
+                password: Array<string>
+            },
+        )
         setStatus(null)
 
         axios
@@ -76,10 +97,7 @@ export const useAuth = (
             })
             .catch(error => {
                 if (error.response.status !== 422) throw error
-
-                setErrors(
-                    Object.values(error.response.data.errors).flat() as [],
-                )
+                setErrors(error.response.data.errors)
             })
     }
 
@@ -89,12 +107,12 @@ export const useAuth = (
         email,
     }: {
         email: string
-        setErrors: (error: string[]) => void
+        setErrors: Dispatch<SetStateAction<{ email: Array<string> }>>
         setStatus: (status: string | null) => void
     }) => {
         await csrf()
 
-        setErrors([])
+        setErrors({} as { email: Array<string> })
         setStatus(null)
 
         axios
@@ -102,12 +120,7 @@ export const useAuth = (
             .then(response => setStatus(response.data.status))
             .catch(error => {
                 if (error.response.status !== 422) throw error
-
-                setErrors(
-                    Object.values(
-                        error.response.data.errors,
-                    ).flat() as string[],
-                )
+                setErrors(error.response.data.errors)
             })
     }
 
@@ -119,30 +132,36 @@ export const useAuth = (
         email: string
         password: string
         password_confirmation: string
-        setErrors: (error: string[]) => void
+        setErrors: Dispatch<
+            SetStateAction<{
+                email: Array<string>
+                password: Array<string>
+                password_confirmation: Array<string>
+            }>
+        >
         setStatus: (status: string | null) => void
     }) => {
         await csrf()
 
-        setErrors([])
+        setErrors(
+            {} as {
+                email: Array<string>
+                password: Array<string>
+                password_confirmation: Array<string>
+            },
+        )
         setStatus(null)
 
         axios
             .post('/reset-password', { token: router.query.token, ...props })
             .then(response =>
                 router.push(
-                    '/login?reset=' +
-                        (window as any).btoa(response.data.status),
+                    '/login?reset=' + window.btoa(response.data.status),
                 ),
             )
             .catch(error => {
                 if (error.response.status !== 422) throw error
-
-                setErrors(
-                    Object.values(
-                        error.response.data.errors,
-                    ).flat() as string[],
-                )
+                setErrors(error.response.data.errors)
             })
     }
 
@@ -158,9 +177,7 @@ export const useAuth = (
 
     const logout = useCallback(async () => {
         if (!error) {
-            await axios.post('/logout').then(() => {
-                mutate()
-            })
+            await axios.post('/logout').then(() => mutate())
         }
         window.location.pathname = '/login'
     }, [error, mutate])
@@ -168,6 +185,11 @@ export const useAuth = (
     useEffect(() => {
         if (middleware === 'guest' && redirectIfAuthenticated && user)
             router.push(redirectIfAuthenticated)
+        if (
+            window.location.pathname === '/verify-email' &&
+            user?.email_verified_at
+        )
+            router.push(redirectIfAuthenticated as string)
         if (middleware === 'auth' && error) logout()
     }, [user, error, router, middleware, redirectIfAuthenticated, logout])
 

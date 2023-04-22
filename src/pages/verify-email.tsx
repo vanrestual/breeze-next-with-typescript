@@ -8,7 +8,10 @@ import Button from '@/components/Button'
 import { useAuth } from '@/hooks/auth'
 
 const VerifyEmail: NextPage = () => {
-    const { logout, resendEmailVerification } = useAuth({ middleware: 'auth' })
+    const { logout, resendEmailVerification } = useAuth({
+        middleware: 'auth',
+        redirectIfAuthenticated: '/dashboard',
+    })
 
     const [status, setStatus] = useState<string | null>(null)
 
@@ -17,9 +20,7 @@ const VerifyEmail: NextPage = () => {
             <AuthCard
                 logo={
                     <Link href="/">
-                        <a>
-                            <ApplicationLogo className="h-20 w-20 fill-current text-gray-500" />
-                        </a>
+                        <ApplicationLogo className="h-20 w-20 fill-current text-gray-500" />
                     </Link>
                 }
             >

@@ -31,9 +31,7 @@ const Navigation: FC<NavigationProps> = ({ user }) => {
                         {/* Logo */}
                         <div className="flex shrink-0 items-center">
                             <Link href="/dashboard">
-                                <a>
-                                    <ApplicationLogo className="block h-10 w-auto fill-current text-gray-600" />
-                                </a>
+                                <ApplicationLogo className="block h-10 w-auto fill-current text-gray-600" />
                             </Link>
                         </div>
 
@@ -118,7 +116,7 @@ const Navigation: FC<NavigationProps> = ({ user }) => {
             {/* Responsive Navigation Menu */}
             {open && (
                 <div className="block sm:hidden">
-                    <div className="space-y-1 pt-2 pb-3">
+                    <div className="space-y-1 pb-3 pt-2">
                         <ResponsiveNavLink
                             href="/dashboard"
                             active={router.pathname === '/dashboard'}
@@ -128,7 +126,7 @@ const Navigation: FC<NavigationProps> = ({ user }) => {
                     </div>
 
                     {/* Responsive Settings Options */}
-                    <div className="border-t border-gray-200 pt-4 pb-1">
+                    <div className="border-t border-gray-200 pb-1 pt-4">
                         <div className="flex items-center px-4">
                             <div className="shrink-0">
                                 <svg
