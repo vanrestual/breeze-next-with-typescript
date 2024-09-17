@@ -4,4 +4,3 @@
 .gitattributes export-ignore
 .gitignore export-ignore
 .styleci.yml export-ignore
-RELEASE.md export-ignore
