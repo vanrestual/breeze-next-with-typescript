@@ -5,7 +5,12 @@ const config: Config = {
     content: ['./src/**/*.{js,ts,jsx,tsx}'],
     darkMode: 'media',
     theme: {
-        extend: {},
+        extend: {
+            colors: {
+                background: 'var(--background)',
+                foreground: 'var(--foreground)',
+            },
+        },
     },
     plugins: [forms],
 }

@@ -1,19 +1,34 @@
 import '@/app/globals.css'
 import type { Metadata } from 'next'
-import { Nunito } from 'next/font/google'
-import type { PropsWithChildren } from 'react'
+import localFont from 'next/font/local'
 
-const nunitoFont = Nunito({ display: 'swap', subsets: ['latin'] })
+const geistMono = localFont({
+    src: '../assets/fonts/GeistMonoVF.woff',
+    variable: '--font-geist-mono',
+    weight: '100 900',
+})
+
+const geistSans = localFont({
+    src: '../assets/fonts/GeistVF.woff',
+    variable: '--font-geist-sans',
+    weight: '100 900',
+})
 
 export const metadata: Metadata = {
     title: 'Laravel',
     description: 'Laravel description',
 }
 
-export default function Layout({ children }: Readonly<PropsWithChildren>) {
+export default function Layout({
+    children,
+}: Readonly<{ children: React.ReactNode }>) {
     return (
         <html lang="en">
-            <body className={nunitoFont.className}>{children}</body>
+            <body
+                className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+            >
+                {children}
+            </body>
         </html>
     )
 }
