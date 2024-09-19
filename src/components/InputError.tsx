@@ -1,20 +1,28 @@
-import { FC, HTMLAttributes } from 'react'
+import type { HTMLAttributes } from 'react'
 
-const InputError: FC<
-    HTMLAttributes<HTMLParagraphElement> & { messages: Array<string> }
-> = ({ className = '', messages = [], ...props }) => (
-    <>
-        {messages.length > 0 &&
-            messages.map((message, index) => (
-                <p
-                    className={`${className} text-sm text-red-600`}
-                    key={index}
-                    {...props}
-                >
-                    {message}
-                </p>
-            ))}
-    </>
-)
-
-export default InputError
+export default function InputError({
+    className,
+    messages,
+    ...props
+}: HTMLAttributes<HTMLParagraphElement> & {
+    messages: string | string[]
+}) {
+    return Array.isArray(messages) ? (
+        messages.map((message, index) => (
+            <p
+                className={`${className} text-sm text-red-600 dark:text-red-500`}
+                key={index}
+                {...props}
+            >
+                {message}
+            </p>
+        ))
+    ) : (
+        <p
+            className={`${className} text-sm text-red-600 dark:text-red-500`}
+            {...props}
+        >
+            {messages}
+        </p>
+    )
+}

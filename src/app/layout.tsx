@@ -1,7 +1,7 @@
-import type { PropsWithChildren } from 'react'
+import '@/app/globals.css'
 import type { Metadata } from 'next'
 import { Nunito } from 'next/font/google'
-import '@/app/globals.css'
+import type { PropsWithChildren } from 'react'
 
 const nunitoFont = Nunito({ display: 'swap', subsets: ['latin'] })
 
