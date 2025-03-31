@@ -23,7 +23,7 @@ function Dropdown({
 }: PropsWithChildren<{
     align: 'left' | 'right' | 'top'
     contentClasses?: string
-    trigger: ReactElement
+    trigger: ReactElement<HTMLButtonElement>
     width: string
 }>) {
     let alignmentClasses: string
@@ -68,7 +68,7 @@ function Dropdown({
                             <MenuItems
                                 className={clsx(
                                     contentClasses,
-                                    'rounded-md ring-1 ring-black/5 focus:outline-none dark:ring-white/5',
+                                    'focus:outline-hidden rounded-md ring-1 ring-black/5 dark:ring-white/5',
                                 )}
                                 static
                             >
@@ -91,7 +91,7 @@ Dropdown.Button = function DropdownButton(
                 <button
                     className={clsx(
                         focus ? 'bg-gray-100 dark:bg-gray-900' : null,
-                        'block w-full px-4 py-2 text-left text-sm leading-5 text-gray-700 transition duration-150 ease-in-out focus:outline-none dark:text-gray-300',
+                        'focus:outline-hidden block w-full px-4 py-2 text-left text-sm leading-5 text-gray-700 transition duration-150 ease-in-out dark:text-gray-300',
                     )}
                     {...props}
                 />
@@ -107,7 +107,7 @@ Dropdown.Link = function DropdownLink(props: PropsWithChildren<LinkProps>) {
                 <Link
                     className={clsx(
                         focus ? 'bg-gray-100 dark:bg-gray-900' : null,
-                        'block w-full px-4 py-2 text-left text-sm leading-5 text-gray-700 transition duration-150 ease-in-out focus:outline-none dark:text-gray-300',
+                        'focus:outline-hidden block w-full px-4 py-2 text-left text-sm leading-5 text-gray-700 transition duration-150 ease-in-out dark:text-gray-300',
                     )}
                     {...props}
                 />

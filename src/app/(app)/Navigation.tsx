@@ -38,7 +38,7 @@ export default function Navigation() {
                             align="right"
                             trigger={
                                 <button
-                                    className="flex items-center rounded-md border border-transparent bg-white px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none dark:bg-gray-800 dark:text-gray-400 dark:hover:text-gray-300"
+                                    className="focus:outline-hidden flex items-center rounded-md border border-transparent bg-white px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out hover:text-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:text-gray-300"
                                     type="button"
                                 >
                                     {user && user.name}
@@ -68,7 +68,7 @@ export default function Navigation() {
                     </div>
                     <div className="-me-2 flex items-center sm:hidden">
                         <button
-                            className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 transition duration-150 ease-in-out hover:bg-gray-100 hover:text-gray-500 focus:bg-gray-100 focus:text-gray-500 focus:outline-none dark:text-gray-500 dark:hover:bg-gray-900/50 dark:hover:text-gray-400 dark:focus:bg-gray-900 dark:focus:text-gray-400"
+                            className="focus:outline-hidden inline-flex items-center justify-center rounded-md p-2 text-gray-400 transition duration-150 ease-in-out hover:bg-gray-100 hover:text-gray-500 focus:bg-gray-100 focus:text-gray-500 dark:text-gray-500 dark:hover:bg-gray-900/50 dark:hover:text-gray-400 dark:focus:bg-gray-900 dark:focus:text-gray-400"
                             onClick={() => setOpen(open => !open)}
                         >
                             <svg

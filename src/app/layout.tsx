@@ -1,22 +1,20 @@
 import '@/app/globals.css'
 import type { Metadata } from 'next'
-import localFont from 'next/font/local'
+import { Geist, Geist_Mono } from 'next/font/google'
 
-const geistMono = localFont({
-    src: '../assets/fonts/GeistMonoVF.woff',
+const geistMono = Geist({
+    subsets: ['latin'],
     variable: '--font-geist-mono',
-    weight: '100 900',
 })
 
-const geistSans = localFont({
-    src: '../assets/fonts/GeistVF.woff',
+const geistSans = Geist_Mono({
+    subsets: ['latin'],
     variable: '--font-geist-sans',
-    weight: '100 900',
 })
 
 export const metadata: Metadata = {
-    title: 'Laravel',
     description: 'Laravel description',
+    title: 'Laravel',
 }
 
 export default function Layout({

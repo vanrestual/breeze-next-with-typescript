@@ -264,6 +264,9 @@ export const useAuth = (
         if (middleware === 'guest' && redirectIfAuthenticated && user) {
             router.replace(redirectIfAuthenticated)
         }
+        if (middleware === 'auth' && user && !user.email_verified_at) {
+            router.push('/verify-email')
+        }
         if (
             redirectIfAuthenticated &&
             user &&

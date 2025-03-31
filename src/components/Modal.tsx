@@ -59,7 +59,7 @@ export default function Modal({
                     <DialogPanel
                         className={clsx(
                             maxWidthClass,
-                            'mb-6 transform overflow-hidden rounded-lg bg-white shadow-xl transition-all sm:mx-auto sm:w-full dark:bg-gray-800',
+                            'mb-6 transform overflow-hidden rounded-lg bg-white shadow-xl transition-all dark:bg-gray-800 sm:mx-auto sm:w-full',
                         )}
                     >
                         {children}
